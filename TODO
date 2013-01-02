@@ -1,0 +1,42 @@
+Todo for next release:
+======================
+
+Milestone 0.1:
+--------------
+* Working code (released)
+
+
+Bugfix release 0.1.1:
+---------------------
+* Don't recommend LANG=C since it will break unicode output
+* add support to specify "[User ID not found]"-String
+    * German: [User-ID nicht gefunden]
+    * may change, so leave it as parameter!
+    * without <-u> either use english or try to detect language
+
+
+Milestone 0.2:
+--------------
+* more sophisticated checking of input
+    => break if --no-with-colons detected
+    => break earlier, if wrong input is detected (especially for --date).
+* Strike through keys not created yet
+
+Milestone 0.3:
+--------------
+* general cleanup perhaps?
+* Generate own exceptions (InvalidEmailException etc.)
+
+
+Milestone 0.5:
+--------------    
+* add GNU gettext support
+    => make help translatable   
+
+
+Milestone 0.6:
+--------------
+* html-output
+    => exporter.html
+    => -h, --html options 
+ 

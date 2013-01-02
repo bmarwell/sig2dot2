@@ -1,0 +1,50 @@
+=head1 sig2dot
+
+sig2dot.py - parses gpg-signature-output and creates a dot-file for graphviz
+
+=head1 SYNOPSIS
+
+$ LANG=C                                                             \
+    gpg --no-options --with-colons --fixed-list-mode  --list-sigs    \
+        --no-default-keyring --keyring ./myLUG.gpg |                 \
+         ./sig2dot.py [options] > myLUG.dot
+
+
+=head1 DESCRIPTION
+
+parses gpg-signature-output and creates a dot-file for graphviz
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<--u>, B<--user-not-found-string>
+
+Specify [User ID not found]-String. Eg if you're a German user specify
+* de_DE.utf8: "[User-ID nicht gefunden]". 
+* fr_FR.utf8: "[Nom utilisateur introuvable]".
+* and so on...
+
+
+=item B<--stupid-example>
+
+Doesn't do anything.
+
+=item B<--version>
+
+Displays information about the currently installed version and exists.
+
+=head1 BUGS
+
+This command has absolutely no bugs, as I have written it. 
+Also, as it has no bugs, there is no need for a bug tracker.
+
+=head1 AUTHORS
+
+sig2dot was written by Benjamin Marwell <E-Post@bmarwell.de>.
+This manual page was written by Benjamin Marwell <E-Post@bmarwell.de>..
+
+Both are released under the GNU General Public License, version 2 or later.
+
+=cut
+
