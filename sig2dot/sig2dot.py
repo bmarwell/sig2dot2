@@ -40,6 +40,7 @@ from gettext import gettext as _
 
 from gpg import OpenPGPKey, OpenPGPSig
 from gpg.colonimporter import PubLine, ParsedLine, LineParser, SigLine, UidLine
+from datetime import date
 
 import exporter.dot.writer as dot
 
@@ -205,6 +206,7 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
     parser.add_option(  "-d", "--date",
                         dest="renderdate",
                         action="store",
+                        default=date.today().isoformat(),
                         help="""Render graph as it appeared on <date> 
                         (ignores more recent signatures).  
                         Date must be in the format "YYYY-MM-DD".  
