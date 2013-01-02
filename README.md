@@ -27,6 +27,5 @@ $ gpg --no-options --with-colons --fixed-list-mode  --list-sigs \
     --no-default-keyring --keyring ./myLUG.gpg |                \
     ./sig2dot.py -u "[User ID not found]" > myLUG.dot
 ```
-
 Then convert it using neato:
 ```$ neato -Tpng myLUG.dot > myLUG.png```
