@@ -231,6 +231,12 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
                         help="Set the [User ID not found]-String. See manpage"
                         " for Details." )    
 
+    parser.add_option(  "-V", "--version",
+                        dest="version",
+                        action="store_true",
+                        default="False",
+                        help="Show the current version." )
+
     (options, args) = parser.parse_args()
     
     check_opts(options)
@@ -239,13 +245,17 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
 
 
 def check_opts(opts):
-    
+
+    if opts.version is True:
+        print("Version: 0.1.1")
+        sys.exit(0)
+
     split_date = opts.renderdate.split("-")
     if len(split_date) != 3:
         print("Please specify date in this format: \"YYYY-MM-DD\"", 
               file=sys.stderr)
         sys.exit(1)
-        
+
     try:
         str(opts.user)
     except:
