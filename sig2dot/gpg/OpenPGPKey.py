@@ -93,6 +93,12 @@ class OpenPGPKey(object):
         
         return self.__signed
     
+    def __getRatio(self):
+
+        if len(self.__signed) == 0 or len(self.__sigs) == 0:
+            return 1
+        else:
+            return len(self.__signed)/len(self.__sigs)
    
     
     #----------------------------------------------------------------------- #
@@ -166,6 +172,7 @@ class OpenPGPKey(object):
     email = property(__getEmail, __setEmail)
     sigs = property(__getSigs)
     signed = property(__getSigned)
+    ratio = property(__getRatio)
         
         
     

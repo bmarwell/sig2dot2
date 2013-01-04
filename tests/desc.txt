@@ -5,9 +5,9 @@ We use some testing keyrings to simulate correct behaviour.
     0 given (no others)
     0 gotten (no others)
     * no ratio (set to 1)
-    * red = 0 / 1 = 0
-    * green = 0 / 0 / 1 * 0.75 * 2/3 + 1/3 = 1/3 (assuming ratio will be 1 [default] and then be devided by 1)
-    * blue = 0 / 1 * 2/3 + 1/3 = 1/3
+    * red = 0 / 1 = 0 = 0
+    * green = 0 / 0 / 1 * 0.75 * 2/3 + 1/3 = 0.5 + 1/3 (assuming ratio will be 1 [default] and then be devided by 1) = 0.8333333
+    * blue = 0 / 1 * 2/3 + 1/3 = 1/3 = 0.3333
 
 (2)
     A keyring with two keys, signed each other, should create a dot file

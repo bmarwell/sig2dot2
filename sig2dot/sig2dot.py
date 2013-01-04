@@ -155,6 +155,11 @@ def process_sig(sigline, key):
 
 def process_signer(signer, signed, keylist):
     
+    # No selfsigs, please
+    print("Signer: {0}; signed: {1}".format(signer, signed.id))
+    if signer == signed.id:
+        return keylist
+    
     # signer is an ID, signed a key
     signer_key_dummy = OpenPGPKey.OpenPGPKey()
     signer_key_dummy.id = signer

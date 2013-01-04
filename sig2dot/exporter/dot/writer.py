@@ -95,7 +95,7 @@ def get_relations(keylist, unixtime):
                 
             if draw == True:
                 relationlist.append(                        \
-                    """    \"{0}\"    ->    \"{1}\""""      \
+                    """    \"{0}\"    ->    \"{1}\" """      \
                     .format(signer.id,    key.id)           \
                 )
             else:       
@@ -114,7 +114,7 @@ def get_max_sigratio(keylist):
     #    signed  = given signatures
     #    sigs    = gotten signatures
     # ratio =  given / gotten
-    max_keyratio = 0
+    max_keyratio = 1
     for id, key in keylist.items():
         #print("Signed:", len(key.signed))
         #print("Gotten:", len(key.sigs))
@@ -129,7 +129,7 @@ def get_max_sigratio(keylist):
 
 def get_max_signed(keylist):
     
-    max_signed = 0
+    max_signed = 1
     for key in keylist.values():
         if len(key.signed) > max_signed:
             max_signed = len(key.signed)
@@ -139,7 +139,7 @@ def get_max_signed(keylist):
     
 def get_max_sigs(keylist):
     
-    max_sigs = 0
+    max_sigs = 1
     for key in keylist.values():
         if len(key.sigs) > max_sigs:
             max_sigs = len(key.sigs)
@@ -174,8 +174,9 @@ def write_keys(keylist, max_sigs, max_signed, max_ratio, trans):
     #=========================================================================
     
     for key in keylist.values():
+        key_ratio = key.ratio # given/gotten
         red = len(key.signed) / max_signed
-        green = (len(key.sigs) / len(key.signed) / max_ratio * 0.75) * 2/3 + 1/3
+        green = (key.ratio / max_ratio * 0.75) * 2/3 + 1/3
         blue = (len(key.sigs) / max_sigs) * 2/3 + 1/3
         
         h, s, v = rgb_to_hsv(red, green, blue)
@@ -190,7 +191,13 @@ def write_keys(keylist, max_sigs, max_signed, max_ratio, trans):
                   .format(h, s, v), end=""
             )
         
-        print("]")
+        print("]", end="")
+        print(
+                " //{0}::{1}::{2}// ".format(red, green, blue),
+                end="")
+        print()
+
+        print("{0}".format(key.signed))
     
 
 def write_relations(keylist, unixtime):
