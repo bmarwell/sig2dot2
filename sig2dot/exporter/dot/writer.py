@@ -187,18 +187,17 @@ def write_keys(keylist, max_sigs, max_signed, max_ratio, trans):
         if trans == True:
             print(""",fillcolor="transparent" """)
         else:
-            print(""",fillcolor="{0},{1},{2}" """   \
-                  .format(h, s, v), end=""
-            )
+            print(""",fillcolor="{0},{1},{2}" """  
+                  .format(round(h, 3), round(s, 3), round(v, 3)),
+                  end="")
         
         print("]", end="")
         print(
-                " //{0}::{1}::{2}// ".format(red, green, blue),
+                " //{0}::{1}::{2}// "
+                .format(round(red, 3), round(green, 3), round(blue, 3)),
                 end="")
         print()
 
-        print("{0}".format(key.signed))
-    
 
 def write_relations(keylist, unixtime):
     

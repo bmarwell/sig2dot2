@@ -156,7 +156,6 @@ def process_sig(sigline, key):
 def process_signer(signer, signed, keylist):
     
     # No selfsigs, please
-    print("Signer: {0}; signed: {1}".format(signer, signed.id))
     if signer == signed.id:
         return keylist
     
