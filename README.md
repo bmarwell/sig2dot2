@@ -3,12 +3,15 @@
 A revised version of sig2dot (creating PGP signing web-of-trust-graphics) written in python.
 
 ## REQUIREMENTS
-sig2dot (revised) uses python3. If you do not have python3 installed,
+sig2dot (revised) uses python >= 3.3. If you do not have python3 installed,
 get it at: http://www.python.org/.
 
 If you're using Debian/Ubuntu or any other .deb-based Distribution, you can
 most likely just type:
 ```$ sudo aptitude install python3```
+
+You also need the iso8601 python module:
+```$ sudo pip3 install iso8601```
 
 The most important application is gnupg. Without it, you are unable to feed
 sig2dot with data.

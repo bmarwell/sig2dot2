@@ -21,7 +21,6 @@
 import sys
 
 from colorsys import rgb_to_hsv
-from time import time, gmtime
 from calendar import timegm
 
 from gpg import OpenPGPKey, OpenPGPSig
@@ -42,9 +41,9 @@ def create_dot(keylist, title, trans, date):
     @type date:       string (YYYY-MM-DD)
     """
     
-    unixtime = get_renderdate(date)
+    unixtime = int(date.timestamp())
     
-    print("Renderdate: ", unixtime, file=sys.stderr)
+    print("Renderdate: %s (%d)" % (date.isoformat(), unixtime), file=sys.stderr)
 
     # Calculate maximums for colouring
     max_sigs = get_max_sigs(keylist)
@@ -61,20 +60,6 @@ def create_dot(keylist, title, trans, date):
 #==============================================================================
 # Helper functions for other functions
 #==============================================================================
-    
-def get_renderdate(date):
-    
-    y, m, d = gmtime().tm_year, gmtime().tm_mon, gmtime().tm_mday 
-    if date:
-        try:
-            y, m, d = date.split("-")
-        except:
-            pass
-    
-    renderdate = timegm((int(y), int(m), int(d), 0, 0, 0))
-    
-    return renderdate
-
 
 def get_relations(keylist, unixtime):
     
