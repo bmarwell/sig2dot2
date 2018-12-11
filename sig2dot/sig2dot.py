@@ -36,11 +36,12 @@
 
 import sys
 
+import iso8601
 from gettext import gettext as _
 
 from gpg import OpenPGPKey, OpenPGPSig
 from gpg.colonimporter import PubLine, ParsedLine, LineParser, SigLine, UidLine
-from datetime import date
+from datetime import datetime
 
 import exporter.dot.writer as dot
 
@@ -206,10 +207,11 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
     parser.add_option(  "-d", "--date",
                         dest="renderdate",
                         action="store",
-                        default=date.today().isoformat(),
+                        default=datetime.utcnow().isoformat(),
                         help="""Render graph as it appeared on <date> 
                         (ignores more recent signatures).  
-                        Date must be in the format "YYYY-MM-DD".  
+                        Date must be in the ISO8601 format.  
+                        UTC is assumed if zone designator is missing.  
                         Will also ignore keys that have since been revoked.""" )
 
     parser.add_option(  "-q", "--quiet",
@@ -250,9 +252,10 @@ def check_opts(opts):
         print("Version: 0.1.1")
         sys.exit(0)
 
-    split_date = opts.renderdate.split("-")
-    if len(split_date) != 3:
-        print("Please specify date in this format: \"YYYY-MM-DD\"", 
+    try:
+        opts.renderdate = iso8601.parse_date(opts.renderdate)
+    except iso8601.iso8601.ParseError:
+        print("Please specify date in ISO8601 format.", 
               file=sys.stderr)
         sys.exit(1)
 
