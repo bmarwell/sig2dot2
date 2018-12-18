@@ -33,7 +33,7 @@
 # $ neato -Tpng myLUG.dot > myLUG.png
 # =============================================================================
 
-
+import logging
 import sys
 
 import iso8601
@@ -45,6 +45,7 @@ from datetime import datetime
 
 import exporter.dot.writer as dot
 
+logger = logging.getLogger(__name__)
 
 def main():
 
@@ -266,10 +267,11 @@ def check_opts(opts):
     try:
         str(opts.user)
     except:
-        print("Please specify a user-id-_STRING_.", file=sys.stderr)
+        logger.error("Please specify a user-id-_STRING_.")
         sys.exit(1)
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(name)s %(levelname)s %(message)s")
     main()
     sys.exit(0)

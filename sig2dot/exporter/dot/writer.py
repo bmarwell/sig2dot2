@@ -18,12 +18,15 @@
     along with sig2dot.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import logging
 import sys
 
 from colorsys import rgb_to_hsv
 from calendar import timegm
 
 from gpg import OpenPGPKey, OpenPGPSig
+
+logger = logging.getLogger(__name__)
 
 
 # =============================================================================
@@ -44,7 +47,7 @@ def create_dot(keylist, title, trans, date):
 
     unixtime = int(date.timestamp())
 
-    print("Renderdate: %s (%d)" % (date.isoformat(), unixtime), file=sys.stderr)
+    logger.info("Renderdate: %s (%d)" % (date.isoformat(), unixtime))
 
     # Calculate maximums for colouring
     max_sigs = get_max_sigs(keylist)
@@ -107,7 +110,7 @@ def get_max_sigratio(keylist):
             if (len(key.signed) / len(key.sigs)) > max_keyratio:
                 max_keyratio = (len(key.signed) / len(key.sigs))
 
-    print("Max_Ratio: ", max_keyratio, file=sys.stderr)
+    logger.info("Max_Ratio: %s" % max_keyratio)
 
     return max_keyratio
 
