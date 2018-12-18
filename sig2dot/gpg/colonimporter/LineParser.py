@@ -22,17 +22,18 @@ import sys
 
 from . import PubLine, SigLine, UidLine
 
-#=============================================================================
+
+# =============================================================================
 # Main function
-#=============================================================================
+# =============================================================================
 def parse_line(line):
-    
+
     splits = line.split(":")
-    
+
     if splits[0] == "pub":
         myPubLine = create_publine(splits)
         return myPubLine
-    
+
     elif splits[0] == "uid":
         myUidLine = create_uidline(splits)
         return myUidLine
@@ -40,18 +41,18 @@ def parse_line(line):
     elif splits[0] == "sig":
         mySigLine = create_sigline(splits)
         return mySigLine
-    
+
     else:
         pass
-    
 
-#==============================================================================
+
+# ==============================================================================
 # Return helper functions
-#==============================================================================
-    
+# ==============================================================================
+
 def create_publine(splits):
     """
-    Creates a publine-class when given a list which has been created by 
+    Creates a publine-class when given a list which has been created by
     splitting a gpg-output-line with seperator ":".
     @param splits:   split up input list
     @type splits:    list of strings, integers
@@ -60,12 +61,12 @@ def create_publine(splits):
     myPubLine = PubLine.PubLine()
     myPubLine.id = splits[4]
     myPubLine.creationdate = splits[5]
-    
+
     if splits[6] != "":
         myPubLine.expireydate = splits[6]
     else:
         myPubLine.expireydate = -1
-    
+
     return myPubLine
 
 
@@ -75,26 +76,26 @@ def create_uidline(splits):
     @param splits:   split up input line
     @type splits:    list of strings, integers
     """
-    
+
     myUidLine = UidLine.UidLine()
     myUidLine.name = splits[9].split(" (")[0].split(" <")[0]
-    
-    try: 
-        myUidLine.email = splits[9].split(" <")[1][:-1] 
-    except: 
+
+    try:
+        myUidLine.email = splits[9].split(" <")[1][:-1]
+    except:
         myUidLine.email = ""
-        
+
     try:
         myUidLine.comment = splits[9].split(" (")[1].split(") ")[0]
     except:
-        myUidLine.comment = "" 
- 
+        myUidLine.comment = ""
+
     return myUidLine
 
 
 def create_sigline(splits):
     """
-    
+
     @param splits:   split up input line
     @type splits:    list of strings, integers
     """
@@ -102,11 +103,10 @@ def create_sigline(splits):
     mySigLine.id = splits[4]
     mySigLine.signdate = splits[5]
     mySigLine.name = splits[9]
-    
+
     if splits[6] != "":
         mySigLine.expirydate = splits[6]
     else:
         mySigLine.expirydate = -1
-    
-    return mySigLine
 
+    return mySigLine

@@ -20,62 +20,59 @@
 
 from .ParsedLine import ParsedLine
 
+
 class SigLine(ParsedLine):
     """ An object for a gpg-sig-line beginning with pub. """
 
     def __getID(self):
-        
+
         return self.__id
-    
+
     def __setID(self, id):
-        
+
         try:
             int(id, 16)
         except:
             raise ValueError
-        
+
         self.__id = id
-        
-        
+
     def __getSigndate(self):
-        
+
         return self.__signdate
-    
+
     def __setSigndate(self, date):
-        
+
         try:
             int(date)
         except:
             raise TypeError
-        
+
         self.__signdate = date
 
-    
     def __getExpirydate(self):
-        
+
         return self.__expirydate
 
     def __setExpirydate(self, date):
-        
+
         try:
             int(date)
         except:
             raise TypeError
-        
+
         self.__expirydate = date
-        
-    
+
     def __getName(self):
-        
+
         return self.__name
-    
+
     def __setName(self, name):
-        
+
         if not isinstance(name, str):
             raise TypeError
-        
-        self.__name = name
 
+        self.__name = name
 
     def __init__(self):
         '''
@@ -85,10 +82,9 @@ class SigLine(ParsedLine):
         self.__id = ""
         self.__expirydate = -1
         self.__name = ""
-    
-    # hidden getters and setters 
+
+    # hidden getters and setters
     id = property(__getID, __setID)
     signdate = property(__getSigndate, __setSigndate)
     expirydate = property(__getExpirydate, __setExpirydate)
     name = property(__getName, __setName)
-        

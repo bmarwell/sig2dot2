@@ -18,11 +18,11 @@
     along with sig2dot.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+
 class ParsedLine(object):
     """
     Dummy generalist class
     """
-
 
     def __init__(self):
         """
