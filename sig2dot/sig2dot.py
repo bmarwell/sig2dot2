@@ -256,7 +256,7 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
 def check_opts(opts):
 
     if opts.version is True:
-        print("Version: 0.1.1")
+        print("Version: 0.1.2")
         sys.exit(0)
 
     try:

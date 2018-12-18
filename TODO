@@ -14,6 +14,11 @@ Bugfix release 0.1.1:
     * may change, so leave it as parameter!
     * without <-u> either use english or try to detect language
 
+Bugfix release 0.1.2:
+---------------------
+* Date paramter now takes ISO8601.
+* Fixed issue with date rounding when running with sigs/keys from the current date.
+* Fixed code related to all-keys parameter. This breaks previous default behavior.
 
 Milestone 0.2:
 --------------
