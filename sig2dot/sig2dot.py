@@ -47,6 +47,7 @@ import exporter.dot.writer as dot
 
 logger = logging.getLogger(__name__)
 
+
 def main():
 
     opts = getopt()
