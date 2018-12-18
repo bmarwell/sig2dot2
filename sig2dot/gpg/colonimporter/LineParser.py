@@ -18,8 +18,6 @@
     along with sig2dot.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import sys
-
 from . import PubLine, SigLine, UidLine
 
 

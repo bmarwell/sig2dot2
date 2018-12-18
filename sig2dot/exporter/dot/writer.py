@@ -19,12 +19,8 @@
 """
 
 import logging
-import sys
 
 from colorsys import rgb_to_hsv
-from calendar import timegm
-
-from gpg import OpenPGPKey, OpenPGPSig
 
 logger = logging.getLogger(__name__)
 
