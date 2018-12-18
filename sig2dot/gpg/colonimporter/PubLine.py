@@ -20,79 +20,73 @@
 
 from .ParsedLine import ParsedLine
 
+
 class PubLine(ParsedLine):
     """ An object for a gpg-listsig-line beginning with pub. """
 
     def __getID(self):
-        
+
         return self.__id
-    
+
     def __setID(self, __id):
-        
+
         try:
             int(__id, 16)
         except:
             raise ValueError
-        
+
         self.__id = __id
-    
-    
+
     def __getCreationdate(self):
-        
+
         return self.__creationdate
-    
+
     def __setCreationdate(self, __date):
-        
+
         try:
             int(__date)
         except:
             raise ValueError
-        
+
         self.__creationdate = __date
 
-    
     def __getExpireydate(self):
-        
+
         return self.__expireydate
-    
+
     def __setExpireydate(self, __date):
-        
+
         try:
             int(__date)
         except:
             raise ValueError
-        
+
         self.__expireydate = __date
-    
 
     def __eq__(self, other):
         '''
-        
+
         @param other: any object to compare with
         '''
-        
+
         if not isinstance(other, PubLine):
             return False
         elif self.id == other.id:
-            return True 
+            return True
         else:
             return False
-
 
     def __init__(self):
         '''
         Default constructor with no attributes
         '''
-        
+
         ParsedLine.__init__(self)
         self.__id = ""
         self.__creationdate = 0
         self.__expireydate = 0
-        
-   
 
-    # hidden getters and setters 
+    # hidden getters and setters
     id = property(__getID, __setID)
     creationdate = property(__getCreationdate, __setCreationdate)
     expireydate = property(__getExpireydate, __setExpireydate)
-        

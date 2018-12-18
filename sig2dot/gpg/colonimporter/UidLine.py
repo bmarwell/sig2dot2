@@ -20,58 +20,54 @@
 
 from .ParsedLine import ParsedLine
 
+
 class UidLine(ParsedLine):
     """ An object for a gpg-sig-line beginning with uid. """
-    
+
     def __getName(self):
-        
+
         return self.__name
-    
+
     def __setName(self, name):
-        
+
         if not isinstance(name, str):
             raise TypeError
-        
+
         self.__name = name
 
-    
     def __getComment(self):
-        
+
         return self.__comment
-    
+
     def __setComment(self, comment):
-    
+
         if not isinstance(comment, str):
             raise TypeError
-        
+
         self.__comment = comment
-    
-    
+
     def __getEmail(self):
-        
+
         return self.__email
-    
+
     def __setEmail(self, email):
-        
+
         if not isinstance(email, str):
             raise TypeError
-        
+
         self.__email = email
-
-
 
     def __init__(self):
         '''
         Constructor
         '''
-        
+
         ParsedLine.__init__(self)
         self.__name = ""
         self.__comment = ""
         self.__email = ""
-    
-    # hidden getters and setters 
+
+    # hidden getters and setters
     name = property(__getName, __setName)
     comment = property(__getComment, __setComment)
     email = property(__getEmail, __setEmail)
-        
