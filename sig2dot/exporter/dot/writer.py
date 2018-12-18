@@ -19,12 +19,8 @@
 """
 
 import logging
-import sys
 
 from colorsys import rgb_to_hsv
-from calendar import timegm
-
-from gpg import OpenPGPKey, OpenPGPSig
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +78,7 @@ def get_relations(keylist, unixtime):
             if int(signer.signdate) > unixtime:
                 draw = False
 
-            if draw == True:
+            if draw:
                 relationlist.append("""    \"{0}\"    ->    \"{1}\""""
                                     .format(signer.id,    key.id)
                                     )
@@ -170,7 +166,7 @@ def write_keys(keylist, max_sigs, max_signed, max_ratio, trans):
               .format(key.id, key.name),
               end="")
 
-        if trans == True:
+        if trans:
             print(""",fillcolor="transparent" """)
         else:
             print(""",fillcolor="{0},{1},{2}" """

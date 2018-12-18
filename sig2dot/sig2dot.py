@@ -47,6 +47,7 @@ import exporter.dot.writer as dot
 
 logger = logging.getLogger(__name__)
 
+
 def main():
 
     opts = getopt()
@@ -114,7 +115,7 @@ def process_pubkey(pl, keylist):
     current_key = OpenPGPKey.OpenPGPKey()
     current_key.id = pl.id
 
-    if not pl.id in keylist:
+    if pl.id not in keylist:
         keylist[pl.id] = current_key
     else:
         current_key = keylist[pl.id]
@@ -160,7 +161,7 @@ def process_signer(signer, signed, keylist):
     signer_key_dummy.id = signer
 
     # fetch existing or add new
-    if not signer in keylist:
+    if signer not in keylist:
         keylist[signer] = signer_key_dummy
     else:
         signer_key_dummy = keylist[signer]
@@ -190,7 +191,7 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
                       "--all-keys",
                       dest="allkeys",
                       action="store_true",
-                      default="False",
+                      default=False,
                       help=_("Render all keys, even if they're not signed "
                              "by any other key."))
 
@@ -198,7 +199,7 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
                       "--black-white",
                       dest="blackwhite",
                       action="store_true",
-                      default="False",
+                      default=False,
                       help="""Black and white / do not colourize. In fact,
                       it will be transparent. If you use this,
                       be sure not to use jpeg or other formats for graphing,
@@ -219,7 +220,7 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
                       "--quiet",
                       dest="verbose",
                       action="store_false",
-                      default="True",
+                      default=True,
                       help="Be quiet")
 
     parser.add_option("-t",
@@ -241,7 +242,7 @@ LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
                       "--version",
                       dest="version",
                       action="store_true",
-                      default="False",
+                      default=False,
                       help="Show the current version.")
 
     (options, args) = parser.parse_args()
