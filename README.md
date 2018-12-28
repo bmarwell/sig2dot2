@@ -32,3 +32,8 @@ $ gpg --no-options --with-colons --fixed-list-mode  --list-sigs \
 ```
 Then convert it using neato:
 ```$ neato -Tpng myLUG.dot > myLUG.png```
+
+## CONTRIBUTING
+Testing is done with pytest via tox:
+```$ pip install tox```
+```$ tox```
