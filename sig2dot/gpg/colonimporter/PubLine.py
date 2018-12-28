@@ -50,18 +50,18 @@ class PubLine(ParsedLine):
 
         self.__creationdate = __date
 
-    def __getExpireydate(self):
+    def __getExpirydate(self):
 
-        return self.__expireydate
+        return self.__expirydate
 
-    def __setExpireydate(self, __date):
+    def __setExpirydate(self, __date):
 
         try:
             int(__date)
         except:
             raise ValueError
 
-        self.__expireydate = __date
+        self.__expirydate = __date
 
     def __eq__(self, other):
         '''
@@ -84,9 +84,9 @@ class PubLine(ParsedLine):
         ParsedLine.__init__(self)
         self.__id = ""
         self.__creationdate = 0
-        self.__expireydate = 0
+        self.__expirydate = 0
 
     # hidden getters and setters
     id = property(__getID, __setID)
     creationdate = property(__getCreationdate, __setCreationdate)
-    expireydate = property(__getExpireydate, __setExpireydate)
+    expirydate = property(__getExpirydate, __setExpirydate)

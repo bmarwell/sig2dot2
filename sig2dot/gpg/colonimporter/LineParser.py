@@ -61,9 +61,9 @@ def create_publine(splits):
     myPubLine.creationdate = splits[5]
 
     if splits[6] != "":
-        myPubLine.expireydate = splits[6]
+        myPubLine.expirydate = splits[6]
     else:
-        myPubLine.expireydate = -1
+        myPubLine.expirydate = -1
 
     return myPubLine
 

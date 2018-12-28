@@ -45,13 +45,13 @@ class OpenPGPKey(object):
 
         self.__creationdate = __date
 
-    def __getExpireydate(self):
+    def __getExpirydate(self):
 
-        return self.__expireydate
+        return self.__expirydate
 
-    def __setExpireydate(self, __date):
+    def __setExpirydate(self, __date):
 
-        self.__expireydate = __date
+        self.__expirydate = __date
 
     def __getName(self):
 
@@ -135,7 +135,7 @@ class OpenPGPKey(object):
         '''
         self.__id = ""
         self.__creationdate = 0     # unixtime
-        self.__expireydate = 0      # unixtime
+        self.__expirydate = 0      # unixtime
         self.__name = ""
         self.__comment = ""
         self.__email = ""
@@ -149,7 +149,7 @@ class OpenPGPKey(object):
     # ----------------------------------------------------------------------- #
     id = property(__getID, __setID)
     creationdate = property(__getCreationdate, __setCreationdate)
-    expireydate = property(__getExpireydate, __setExpireydate)
+    expirydate = property(__getExpirydate, __setExpirydate)
     name = property(__getName, __setName)
     comment = property(__getComment, __setComment)
     email = property(__getEmail, __setEmail)

@@ -10,7 +10,7 @@ def test_blank_key():
 
     assert result.id == ""
     assert result.creationdate == 0
-    assert result.expireydate == 0
+    assert result.expirydate == 0
     assert result.name == ""
     assert result.comment == ""
     assert result.email == ""
@@ -28,14 +28,14 @@ def test_key_properties():
     result = sig2dot.gpg.OpenPGPKey.OpenPGPKey()
     result.id = _id
     result.creationdate = creation_date
-    result.expireydate = expiry_date
+    result.expirydate = expiry_date
     result.name = name
     result.comment = comment
     result.email = email
 
     assert result.id == _id
     assert result.creationdate == creation_date
-    assert result.expireydate == expiry_date
+    assert result.expirydate == expiry_date
     assert result.name == name
     assert result.comment == comment
     assert result.email == email

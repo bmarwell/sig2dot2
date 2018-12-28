@@ -20,7 +20,7 @@ def test_parse_pub_line_with_expiry_date():
     assert isinstance(result, sig2dot.gpg.colonimporter.PubLine.PubLine)
     assert result.id == _id
     assert result.creationdate == creation_date
-    assert result.expireydate == expiry_date
+    assert result.expirydate == expiry_date
 
 def test_parse_pub_line_without_expiry_date():
     _id = "ABCDEF0123456789"
@@ -33,7 +33,7 @@ def test_parse_pub_line_without_expiry_date():
     assert isinstance(result, sig2dot.gpg.colonimporter.PubLine.PubLine)
     assert result.id == _id
     assert result.creationdate == creation_date
-    assert result.expireydate == -1
+    assert result.expirydate == -1
 
 def test_parse_sig_line_with_expiry():
     _id = "ABCDEF0123456789"
