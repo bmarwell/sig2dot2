@@ -35,15 +35,14 @@
 
 import logging
 import sys
-
-import iso8601
+from datetime import datetime
 from gettext import gettext as _
 
-from sig2dot.gpg import OpenPGPKey, OpenPGPSig
-from sig2dot.gpg.colonimporter import PubLine, ParsedLine, LineParser, SigLine, UidLine
-from datetime import datetime
+import iso8601
 
 import sig2dot.exporter.dot.writer as dot
+from sig2dot.gpg import OpenPGPKey, OpenPGPSig
+from sig2dot.gpg.colonimporter import PubLine, ParsedLine, LineParser, SigLine, UidLine
 
 logger = logging.getLogger(__name__)
 
