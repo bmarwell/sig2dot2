@@ -18,7 +18,7 @@
     along with sig2dot.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from . import OpenPGPSig
+from sig2dot.gpg import OpenPGPSig
 
 
 class OpenPGPKey(object):

@@ -1,8 +1,3 @@
-import os.path
-import sys
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import sig2dot.gpg.colonimporter.LineParser
 import sig2dot.gpg.colonimporter.PubLine
 import sig2dot.gpg.colonimporter.SigLine

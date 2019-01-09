@@ -18,7 +18,7 @@
     along with sig2dot.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from . import PubLine, SigLine, UidLine
+from sig2dot.gpg.colonimporter import PubLine, SigLine, UidLine
 
 
 # =============================================================================

@@ -39,11 +39,11 @@ import sys
 import iso8601
 from gettext import gettext as _
 
-from gpg import OpenPGPKey, OpenPGPSig
-from gpg.colonimporter import PubLine, ParsedLine, LineParser, SigLine, UidLine
+from sig2dot.gpg import OpenPGPKey, OpenPGPSig
+from sig2dot.gpg.colonimporter import PubLine, ParsedLine, LineParser, SigLine, UidLine
 from datetime import datetime
 
-import exporter.dot.writer as dot
+import sig2dot.exporter.dot.writer as dot
 
 logger = logging.getLogger(__name__)
 
@@ -183,8 +183,7 @@ def getopt():
 
     usage = """
 LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
-    --no-default-keyring --keyring ./myLUG.gpg |
-    ./sig2dot.py > myLUG.dot"""
+    --no-default-keyring --keyring ./myLUG.gpg | sig2dot > myLUG.dot"""
 
     parser = OptionParser(usage=usage)
 

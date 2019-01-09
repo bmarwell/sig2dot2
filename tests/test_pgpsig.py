@@ -1,8 +1,3 @@
-import os.path
-import sys
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import sig2dot.gpg.OpenPGPSig
 
 def test_blank_sig():

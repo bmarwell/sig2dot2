@@ -18,7 +18,7 @@
     along with sig2dot.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from .ParsedLine import ParsedLine
+from sig2dot.gpg.colonimporter.ParsedLine import ParsedLine
 
 
 class PubLine(ParsedLine):
