@@ -1,1 +1,5 @@
+*.egg-info/
 *.pyc
+.tox/
+.vscode/
+venv/
