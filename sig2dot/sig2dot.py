@@ -33,6 +33,7 @@
 # $ neato -Tpng myLUG.dot > myLUG.png
 # =============================================================================
 
+import argparse
 import logging
 import sys
 from datetime import datetime
@@ -49,7 +50,7 @@ logger = logging.getLogger(__name__)
 
 def main():
 
-    opts = getopt()
+    args = getarg()
 
     keylist = {}
     pl = ParsedLine.ParsedLine
@@ -67,7 +68,7 @@ def main():
         elif isinstance(pl, UidLine.UidLine):
             current_key = process_userid(pl, current_key)
         elif isinstance(pl, SigLine.SigLine):
-            if pl.name != opts.user:
+            if pl.name != args.user:
                 # Add signature to signed key and to signing key
                 current_key = process_sig(pl, current_key)
                 # Remember who signed whom
@@ -75,11 +76,11 @@ def main():
         else:
             pass
 
-    if not opts.allkeys:
+    if not args.allkeys:
         keylist = remove_unsigned(keylist)
 
     # output to dot goes here
-    dot.create_dot(keylist, opts.title, opts.blackwhite, opts.renderdate)
+    dot.create_dot(keylist, args.title, args.blackwhite, args.renderdate)
 
 
 def remove_unsigned(keylist):
@@ -173,99 +174,97 @@ def process_signer(signer, signed, keylist):
     return keylist
 
 
-def getopt():
+def getarg():
     """
-    Parses command line parameters for known arguments and options.
+    Parses command line parameters for known arguments.
     """
-
-    from optparse import OptionParser
 
     usage = """
 LANG=C gpg --no-options --with-colons --fixed-list-mode  --list-sigs
     --no-default-keyring --keyring ./myLUG.gpg | sig2dot > myLUG.dot"""
 
-    parser = OptionParser(usage=usage)
+    parser = argparse.ArgumentParser(usage=usage)
 
-    parser.add_option("-a",
-                      "--all-keys",
-                      dest="allkeys",
-                      action="store_true",
-                      default=False,
-                      help=_("Render all keys, even if they're not signed "
-                             "by any other key."))
+    parser.add_argument("-a",
+                        "--all-keys",
+                        dest="allkeys",
+                        action="store_true",
+                        default=False,
+                        help=_("Render all keys, even if they're not signed "
+                               "by any other key."))
 
-    parser.add_option("-b",
-                      "--black-white",
-                      dest="blackwhite",
-                      action="store_true",
-                      default=False,
-                      help="""Black and white / do not colourize. In fact,
-                      it will be transparent. If you use this,
-                      be sure not to use jpeg or other formats for graphing,
-                      which do not support transparency.""")
+    parser.add_argument("-b",
+                        "--black-white",
+                        dest="blackwhite",
+                        action="store_true",
+                        default=False,
+                        help="""Black and white / do not colourize. In fact,
+                        it will be transparent. If you use this,
+                        be sure not to use jpeg or other formats for graphing,
+                        which do not support transparency.""")
 
-    parser.add_option("-d",
-                      "--date",
-                      dest="renderdate",
-                      action="store",
-                      default=datetime.utcnow().isoformat(),
-                      help="""Render graph as it appeared on <date>
-                      (ignores more recent signatures).
-                      Date must be in the ISO8601 format.
-                      UTC is assumed if zone designator is missing.
-                      Will also ignore keys that have since been revoked.""")
+    parser.add_argument("-d",
+                        "--date",
+                        dest="renderdate",
+                        action="store",
+                        default=datetime.utcnow().isoformat(),
+                        help="""Render graph as it appeared on <date>
+                        (ignores more recent signatures).
+                        Date must be in the ISO8601 format.
+                        UTC is assumed if zone designator is missing.
+                        Will also ignore keys that have since been revoked.""")
 
-    parser.add_option("-q",
-                      "--quiet",
-                      dest="verbose",
-                      action="store_false",
-                      default=True,
-                      help="Be quiet")
+    parser.add_argument("-q",
+                        "--quiet",
+                        dest="verbose",
+                        action="store_false",
+                        default=True,
+                        help="Be quiet")
 
-    parser.add_option("-t",
-                      "--title",
-                      dest="title",
-                      action="store",
-                      default="unnamed",
-                      help="Set title for graph. Default: unnamed.")
+    parser.add_argument("-t",
+                        "--title",
+                        dest="title",
+                        action="store",
+                        default="unnamed",
+                        help="Set title for graph. Default: unnamed.")
 
-    parser.add_option("-u",
-                      "--user-not-found-string",
-                      dest="user",
-                      action="store",
-                      default="[User ID not found]",
-                      help="Set the [User ID not found]-String. See manpage"
-                      " for Details.")
+    parser.add_argument("-u",
+                        "--user-not-found-string",
+                        dest="user",
+                        action="store",
+                        default="[User ID not found]",
+                        help="Set the [User ID not found]-String. See manpage"
+                        " for Details.")
 
-    parser.add_option("-V",
-                      "--version",
-                      dest="version",
-                      action="store_true",
-                      default=False,
-                      help="Show the current version.")
+    parser.add_argument("-V",
+                        "--version",
+                        dest="version",
+                        action="store_true",
+                        default=False,
+                        help="Show the current version.")
 
-    (options, args) = parser.parse_args()
+    args = parser.parse_args()
 
-    check_opts(options)
+    check_args(args)
 
-    return options
+    return args
 
 
-def check_opts(opts):
+def check_args(args):
 
-    if opts.version is True:
+    if args.version is True:
         print("Version: 0.1.2")
         sys.exit(0)
 
     try:
-        opts.renderdate = iso8601.parse_date(opts.renderdate)
+        args.renderdate = iso8601.parse_date(args.renderdate)
     except iso8601.iso8601.ParseError:
         print("Please specify date in ISO8601 format.",
               file=sys.stderr)
         sys.exit(1)
 
     try:
-        str(opts.user)
+        str(args.user)
     except:
         logger.error("Please specify a user-id-_STRING_.")
         sys.exit(1)
