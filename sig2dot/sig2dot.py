@@ -87,7 +87,7 @@ def remove_unsigned(keylist):
 
     ids = list(keylist.keys())
     for id in ids:
-        if len(keylist[id].sigs) == 0:
+        if len(keylist[id].sigs) + len(keylist[id].signed) <= 1:
             del keylist[id]
 
     return keylist
